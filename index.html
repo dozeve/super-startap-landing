@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8" />
+  <title>Super Startup - Moderni Biznis Online</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    html, body {
+      height: 100%;
+      background: linear-gradient(135deg, #0a6cff, #0050a4);
+      color: #fff;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      background: rgba(10, 108, 255, 0.85);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      backdrop-filter: saturate(180%) blur(12px);
+      transition: background 0.3s ease;
+    }
+    header:hover {
+      background: rgba(10, 108, 255, 1);
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      cursor: default;
+      user-select: none;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+    nav a {
+      font-weight: 600;
+      margin-left: 30px;
+      position: relative;
+      padding: 5px 0;
+      transition: color 0.3s ease;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 0; height: 3px;
+      background: #00fffb;
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    nav a:hover,
+    nav a:focus {
+      color: #00fffb;
+      outline: none;
+    }
+    nav a:hover::after,
+    nav a:focus::after {
+      width: 100%;
+    }
+
+    /* Hero */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+      overflow: hidden;
+      scroll-margin-top: 80px;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -30%;
+      left: -30%;
+      width: 150%;
+      height: 150%;
+      background: radial-gradient(circle at center, #00fffb 0%, transparent 70%);
+      filter: blur(100px);
+      opacity: 0.3;
+      z-index: 0;
+      animation: pulse 5s infinite alternate ease-in-out;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.3; }
+      100% { transform: scale(1.15); opacity: 0.5; }
+    }
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 720px;
+      color: #f0f9ff;
+      animation: slideUpFade 1.2s ease forwards;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    @keyframes slideUpFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .hero-content h1 {
+      font-size: 3.8rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.1;
+      text-shadow: 0 2px 12px rgba(0,255,251,0.6);
+    }
+    .hero-content p {
+      font-size: 1.4rem;
+      margin-bottom: 40px;
+      font-weight: 500;
+      text-shadow: 0 1px 8px rgba(0,255,251,0.4);
+    }
+    .btn {
+      background: linear-gradient(135deg, #00fff7, #00a8cc);
+      padding: 16px 48px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      color: #00303f;
+      box-shadow: 0 6px 15px rgba(0,255,251,0.6);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+      display: inline-block;
+      letter-spacing: 1.1px;
+    }
+    .btn:hover,
+    .btn:focus {
+      background: #00c8e8;
+      color: #001820;
+      box-shadow: 0 10px 20px rgba(0,255,251,0.8);
+      transform: translateY(-3px);
+      outline: none;
+    }
+
+    /* Section general styles */
+    section {
+      padding: 70px 5vw;
+      scroll-margin-top: 80px;
+    }
+    h2 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #00fffb;
+      text-shadow: 0 0 8px #00fffb66;
+    }
+    p.lead {
+      max-width: 720px;
+      margin: 0 auto 60px auto;
+      font-weight: 500;
+      font-size: 1.2rem;
+      text-align: center;
+      color: #d0f7ffcc;
+      line-height: 1.6;
+    }
+
+    /* About section */
+    #about {
+      background: #00344c;
+      border-radius: 20px;
+      color: #d0f7ffcc;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 50px 20px;
+      box-shadow: 0 10px 40px #001f2d88;
+    }
+    #about img {
+      max-width: 400px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px #000c;
+      user-select: none;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    #about div {
+      max-width: 480px;
+      text-align: left;
+    }
+    #about h2 {
+      color: #00fffb;
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+      letter-spacing: 1.3px;
+    }
+    #about p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #b8f3ffcc;
+      font-weight: 500;
+    }
+
+    /* Benefits Section */
+    #benefits {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 48px;
+      color: #a9e7ffcc;
+      text-align: center;
+    }
+    .benefit {
+      flex: 1 1 260px;
+      background: rgba(0, 255, 251, 0.1);
+      border-radius: 18px;
+      padding: 32px 24px;
+      box-shadow: 0 8px 25px #00ffe333;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+    .benefit:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 16px 40px #00ffe377;
+    }
+    .benefit i {
+      font-size: 48px;
+      color: #00ffff;
+      margin-bottom: 18px;
+      transition: color 0.3s ease;
+    }
+    .benefit h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      color: #00ffffcc;
+      font-weight: 700;
+      letter-spacing: 1.1px;
+    }
+    .benefit p {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: #c4f4ffcc;
+    }
+
+    /* Services Section */
+    #services {
+      background: linear-gradient(135deg, #00344c 90%, #00fffb44 120%);
+      padding-bottom: 90px;
+      border-radius: 24px;
+      margin-top: 40px;
+      box-shadow: 0 10px 40px #001f2dbb;
+      max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .service-card {
+      background: linear-gradient(135deg, #00fffb 90%, #005e8c 120%);
+      color: #00303f;
+      padding: 28px 24px;
+      border-radius: 24px;
+      width: 280px;
+      text-align: center;
+      box-shadow: 0 10px 30px #00fffaa0, 0 4px 15px #004b7dbb;
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      user-select: none;
+    }
+    .service-card:hover {
+      transform: translateY(-12px) scale(1.06);
+      box-shadow: 0 22px 48px #00fffac0, 0 10px 20px #004b7ddd;
+      background: linear-gradient(135deg, #00d2e6 70%, #005e8c 120%);
+    }
+    .service-card i {
+      font-size: 48px;
+      margin-bottom: 18px;
+      color: #00303f;
+      text-shadow: 0 2px 12px #00fff067;
+      transition: color 0.3s ease;
+      display: block;
+    }
+    .service-card:hover i {
+      color: #00ffff;
+      transform: scale(1.1) rotate(-6deg);
+    }
+    .service-card h3 {
+      font-size: 22px;
+      margin: 12px 0 16px 0;
+      letter-spacing: 0.8px;
+      font-weight: 700;
+    }
+    .service-card p {
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.5;
+      color: #00303fcc;
+      min-height: 60px;
+    }
+    #services .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 36px;
+      padding: 0 10px 20px 10px;
+    }
+
+    /* Clients Section */
+    #clients {
+      max-width: 1080px;
+      margin: 80px auto 0 auto;
+      color: #a9e7ffcc;
+      text-align: center;
+      padding: 40px 10px;
+    }
+    #clients h2 {
+      color: #00fffb;
+      text-shadow: 0 0 12px #00fffbaa;
+      margin-bottom: 40px;
+    }
+    .client-logos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 48px;
+      align-items: center;
+    }
+    .client-logos img {
+      width: 120px;
+      filter: brightness(0.75);
+      transition: filter 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+    .client-logos img:hover {
+      filter: brightness(1);
+      transform: scale(1.1);
+    }
+
+    /* Contact Section */
+    #contact {
+      background: #00344c;
+      max-width: 600px;
+      margin: 80px auto 80px auto;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 45px #001f2dcc;
+      color: #d0f7ffcc;
+    }
+    #contact h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #00fffb;
+      font-size: 2.6rem;
+      letter-spacing: 1.3px;
+      text-shadow: 0 0 12px #00fffbbb;
+    }
+    #contact form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    #contact input,
+    #contact textarea {
+      padding: 14px 18px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: box-shadow 0.3s ease;
+      color: #00303f;
+      font-weight: 600;
+      resize: none;
+    }
+    #contact input:focus,
+    #contact textarea:focus {
+      outline: none;
+      box-shadow: 0 0 12px #00fffaaa;
+      background: #e0ffffcc;
+    }
+    #contact button {
+      background: #00fffb;
+      color: #00303f;
+      padding: 16px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+    #contact button:hover,
+    #contact button:focus {
+      background: #00c8e8;
+      outline: none;
+      color: #001820;
+      transform: scale(1.05);
+    }
+    #contact p.contact-info {
+      margin-top: 24px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-align: center;
+      color: #b3e9ffcc;
+    }
+    #contact .social {
+      margin-top: 18px;
+      text-align: center;
+    }
+    #contact .social a {
+      font-size: 26px;
+      margin: 0 16px;
+      color: #00fffb;
+      transition: color 0.3s ease;
+    }
+    #contact .social a:hover {
+      color: #00c8e8;
+    }
+
+    /* Footer */
+    footer {
+      background: #001b30;
+      padding: 22px 0;
+      text-align: center;
+      font-size: 14px;
+      color: #4dbbffcc;
+      user-select: none;
+      box-shadow: inset 0 2px 5px #004c8eaa;
+      letter-spacing: 0.7px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      header {
+        padding: 0 20px;
+      }
+      nav a {
+        margin-left: 18px;
+        font-size: 14px;
+      }
+      .hero-content h1 {
+        font-size: 2.6rem;
+      }
+      .hero-content p {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+      }
+      #about {
+        flex-direction: column;
+        max-width: 90vw;
+        padding: 30px 10px;
+      }
+      #about img {
+        max-width: 90vw;
+        height: auto;
+      }
+      #about div {
+        max-width: 90vw;
+        text-align: center;
+      }
+      #benefits {
+        flex-direction: column;
+        gap: 24px;
+        max-width: 90vw;
+      }
+      #services .cards-container {
+        flex-direction: column;
+        gap: 24px;
+        max-width: 90vw;
+      }
+      #clients {
+        max-width: 90vw;
+        padding: 40px 10px 0 10px;
+      }
+      #contact {
+        max-width: 95vw;
+        padding: 30px 20px;
+      }
+    }
+
+    @media (max-width: 450px) {
+      header {
+        height: 60px;
+      }
+      nav a {
+        margin-left: 12px;
+        font-size: 13px;
+      }
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .hero-content p {
+        font-size: 1rem;
+      }
+      .btn {
+        padding: 14px 32px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Super Startup</div>
+    <nav>
+      <a href="#hero">Početna</a>
+      <a href="#about">O nama</a>
+      <a href="#benefits">Zašto mi?</a>
+      <a href="#services">Usluge</a>
+      <a href="#clients">Klijenti</a>
+      <a href="#contact">Kontakt</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="hero">
+    <div class="hero-content" tabindex="0">
+      <h1>Pokreni svoj biznis s nama</h1>
+      <p>Najmodernija rješenja za tvoju online prisutnost i rast.</p>
+      <a href="#contact" class="btn">Kontaktiraj nas</a>
+    </div>
+  </section>
+
+  <section id="about" tabindex="0" aria-label="O nama">
+    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Tim ljudi na sastanku" />
+    <div>
+      <h2>O nama</h2>
+      <p>
+        Mi smo tim strastvenih stručnjaka koji žive za razvoj digitalnih rješenja.
+        Specijalizirani smo za kreiranje moćnih i responzivnih web stranica koje prodaju.
+        Naša misija je da tvoj biznis postane vidljiv, moderan i profitabilan u digitalnom svijetu.
+      </p>
+    </div>
+  </section>
+
+  <section id="benefits" tabindex="0" aria-label="Zašto izabrati nas?">
+    <h2>Zašto izabrati nas?</h2>
+    <div class="benefit">
+      <i class="fas fa-rocket"></i>
+      <h3>Brz rast</h3>
+      <p>Naša rješenja su optimizovana za brzo učitavanje i konverziju klijenata.</p>
+    </div>
+    <div class="benefit">
+      <i class="fas fa-lock"></i>
+      <h3>Sigurnost</h3>
+      <p>Bez kompromisa - tvoj sajt je siguran i zaštićen od prijetnji.</p>
+    </div>
+    <div class="benefit">
+      <i class="fas fa-mobile-alt"></i>
+      <h3>Responzivni dizajn</h3>
+      <p>Funkcionišemo savršeno na svim uređajima, od mobitela do desktopa.</p>
+    </div>
+    <div class="benefit">
+      <i class="fas fa-headset"></i>
+      <h3>Podrška</h3>
+      <p>Tu smo za tebe - podrška i održavanje dostupni 24/7.</p>
+    </div>
+  </section>
+
+  <section id="services" tabindex="0" aria-label="Usluge">
+    <h2>Usluge</h2>
+    <div class="cards-container">
+      <div class="service-card" tabindex="0">
+        <i class="fas fa-laptop-code"></i>
+        <h3>Web dizajn</h3>
+        <p>Kreiramo moderan, čist i vizuelno impresivan web sajt po tvojoj mjeri.</p>
+      </div>
+      <div class="service-card" tabindex="0">
+        <i class="fas fa-mobile-alt"></i>
+        <h3>Responzivni dizajn</h3>
+        <p>Prilagođavamo sajt za sve ekrane kako bi korisničko iskustvo bilo savršeno.</p>
+      </div>
+      <div class="service-card" tabindex="0">
+        <i class="fas fa-bolt"></i>
+        <h3>Brza isporuka</h3>
+        <p>Efikasno i brzo ispunjavamo zadatke bez kompromisa na kvalitetu.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="clients" tabindex="0" aria-label="Klijenti">
+    <h2>Klijenti</h2>
+    <div class="client-logos" aria-label="Logotipi klijenata">
+      <img src="https://via.placeholder.com/120x60?text=Klijent+1" alt="Logo klijenta 1" />
+      <img src="https://via.placeholder.com/120x60?text=Klijent+2" alt="Logo klijenta 2" />
+      <img src="https://via.placeholder.com/120x60?text=Klijent+3" alt="Logo klijenta 3" />
+      <img src="https://via.placeholder.com/120x60?text=Klijent+4" alt="Logo klijenta 4" />
+    </div>
+  </section>
+
+  <section id="contact" tabindex="0" aria-label="Kontakt">
+    <h2>Kontakt</h2>
+    <form>
+      <input type="text" placeholder="Ime i prezime" required aria-label="Ime i prezime" />
+      <input type="email" placeholder="Email adresa" required aria-label="Email adresa" />
+      <textarea placeholder="Poruka" rows="4" required aria-label="Poruka"></textarea>
+      <button type="submit" class="btn">Pošalji</button>
+    </form>
+    <p class="contact-info">Telefon: <a href="tel:+387644027144" style="color:#00fffb;">064 402 7144</a> | Email: <a href="mailto:veddad89@gmail.com" style="color:#00fffb;">veddad89@gmail.com</a></p>
+    <div class="social" aria-label="Društvene mreže">
+      <a href="https://www.linkedin.com/in/vedad-muracevic-09a774371/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/dozeve" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://wa.me/387644027144" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="viber://chat?number=387644027144" target="_blank" rel="noopener" aria-label="Viber"><i class="fab fa-viber"></i></a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Super Startup. Sva prava zadržana.</p>
+  </footer>
+
+  <script>
+    // Animacija ulaska hero sekcije
+    document.addEventListener('DOMContentLoaded', () => {
+      const hero = document.querySelector('.hero-content');
+      if(hero) {
+        hero.style.opacity = '1';
+        hero.style.transform = 'translateY(0)';
+      }
+    });
+
+    // Fokusi na dugmad i linkove za bolje UX
+    const btn = document.querySelector('.btn');
+    btn.addEventListener('focus', () => btn.style.outline = '2px solid #00fffb');
+    btn.addEventListener('blur', () => btn.style.outline = 'none');
+  </script>
+</body>
+</html>
+
+
+
