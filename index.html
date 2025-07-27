@@ -626,13 +626,15 @@
   </section>
 
   <section id="contact" tabindex="0" aria-label="Kontakt">
-    <h2>Kontakt</h2>
-    <form>
-      <input type="text" placeholder="Ime i prezime" required aria-label="Ime i prezime" />
-      <input type="email" placeholder="Email adresa" required aria-label="Email adresa" />
-      <textarea placeholder="Poruka" rows="4" required aria-label="Poruka"></textarea>
-      <button type="submit" class="btn">Pošalji</button>
-    </form>  <div style="text-align:center; margin-top: 24px;">
+    <h2>Kontakt</h2><form id="kontakt-forma">
+  <input type="text" name="name" placeholder="Ime i prezime" required aria-label="Ime i prezime" />
+  <input type="email" name="email" placeholder="Email adresa" required aria-label="Email adresa" />
+  <input type="text" name="title" placeholder="Naslov poruke" required aria-label="Naslov" />
+  <textarea name="message" placeholder="Poruka" rows="4" required aria-label="Poruka"></textarea>
+  <button type="submit" class="btn">Pošalji</button>
+</form>
+
+      <div style="text-align:center; margin-top: 24px;">
     <a href="mailto:veddad89@gmail.com" class="btn">Pošalji direktan e-mail</a>
   </div>
 
@@ -663,7 +665,25 @@
     const btn = document.querySelector('.btn');
     btn.addEventListener('focus', () => btn.style.outline = '2px solid #00fffb');
     btn.addEventListener('blur', () => btn.style.outline = 'none');
-  </script>
+  </script><!-- EmailJS -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function() {
+    emailjs.init("lzhIM1tJ9xyC_bfmw"); // Tvoj public key
+  })();
+
+  document.getElementById("kontakt-forma").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    emailjs.sendForm("service_hk1n7m4", "q64frtm", this)
+      .then(function() {
+        alert("✅ Poruka je uspješno poslana!");
+      }, function(error) {
+        alert("❌ Greška pri slanju: " + JSON.stringify(error));
+      });
+  });
+</script>
+
 </body>
 </html>
 
